@@ -1,0 +1,6 @@
+{
+  "id": "alice",
+  "displayName": "Alice",
+  "description": "A chibi Alice companion based on the Alice website character.",
+  "spritesheetPath": "spritesheet.webp"
+}

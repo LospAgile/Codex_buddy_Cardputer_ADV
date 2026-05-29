@@ -1,0 +1,1 @@
+676b450e728ebbc7a4c6121545c42874146143eb6ce1c2a7e445205cfe448d59  codex-buddy-cardputer-adv-v0.3.27-ble-pair-merged.bin

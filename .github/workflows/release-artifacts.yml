@@ -1,0 +1,80 @@
+name: Build release artifacts
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  macos-release-artifacts:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e daemon -r requirements-dev.txt platformio pyinstaller
+
+      - name: Run host-side release checks
+        run: PYTHONPATH=daemon/src python tools/release_check.py --skip-firmware
+
+      - name: Check menu app sources
+        run: cargo check --manifest-path apps/codex-buddy-menu/Cargo.toml --bins
+
+      - name: Package firmware
+        run: tools/package_firmware_release.sh
+
+      - name: Package macOS menu app
+        run: tools/package_menu_bar_app.sh
+
+      - name: Build combined checksums
+        run: |
+          cd dist/release
+          find apps firmware -maxdepth 1 -type f \( -name '*.zip' -o -name '*.bin' -o -name '*.json' \) -print \
+            | sort \
+            | xargs shasum -a 256 > SHA256SUMS.txt
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: codex-buddy-release-artifacts
+          path: dist/release
+          if-no-files-found: error
+
+      - name: Remove stale release assets
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" --json assets --jq '.assets[].name' \
+            | while IFS= read -r asset; do
+                if [ -n "$asset" ]; then
+                  gh release delete-asset "$GITHUB_REF_NAME" "$asset" -y
+                fi
+              done
+
+      - name: Attach artifacts to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          overwrite_files: true
+          files: |
+            dist/release/SHA256SUMS.txt
+            dist/release/apps/CodexBuddyMenu-*.json
+            dist/release/apps/CodexBuddyMenu-*.zip
+            dist/release/firmware/codex-buddy-cardputer-adv*.json
+            dist/release/firmware/codex-buddy-cardputer-adv*-merged.bin

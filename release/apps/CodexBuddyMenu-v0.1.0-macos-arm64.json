@@ -1,0 +1,17 @@
+{
+  "name": "CodexBuddyMenu",
+  "version": "0.1.0",
+  "platform": "macos",
+  "arch": "arm64",
+  "artifact": "CodexBuddyMenu-v0.1.0-macos-arm64.zip",
+  "sha256_file": "SHA256SUMS.txt",
+  "contains": [
+    "CodexBuddyMenu.app",
+    "CodexBuddyMenu.app/Contents/MacOS/codex-buddy-menu",
+    "CodexBuddyMenu.app/Contents/MacOS/codex-buddy-preferences",
+    "CodexBuddyMenu.app/Contents/Resources/codex-buddy-daemon",
+    "CodexBuddyMenu.app/Contents/Resources/CodexBuddyBridge.app",
+    "CodexBuddyMenu.app/Contents/Resources/daemon/src/codex_buddy"
+  ],
+  "signature": "ad-hoc"
+}

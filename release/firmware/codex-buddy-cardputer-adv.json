@@ -1,0 +1,15 @@
+{
+  "name": "codex-buddy-cardputer-adv",
+  "platform": "m5stack-cardputer-adv",
+  "firmware_version": "0.3.27-ble-pair",
+  "default_pet": "Alice",
+  "merged_bin": "codex-buddy-cardputer-adv-v0.3.27-ble-pair-merged.bin",
+  "sha256_file": "SHA256SUMS.txt",
+  "flash_offset": "0x0",
+  "flash_offsets": {
+    "bootloader": "0x0000",
+    "partitions": "0x8000",
+    "boot_app0": "0xe000",
+    "app": "0x10000"
+  }
+}

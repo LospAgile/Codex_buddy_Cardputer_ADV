@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleIdentifier</key>
+  <string>local.codex-buddy.ble-smoke</string>
+  <key>CFBundleExecutable</key>
+  <string>ble_smoke</string>
+  <key>CFBundleName</key>
+  <string>Codex Buddy BLE Smoke</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>NSBluetoothAlwaysUsageDescription</key>
+  <string>Codex Buddy uses Bluetooth to send status updates to the M5 Cardputer ADV.</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>Codex Buddy uses Bluetooth to send status updates to the M5 Cardputer ADV.</string>
+</dict>
+</plist>

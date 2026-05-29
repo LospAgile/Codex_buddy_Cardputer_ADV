@@ -1,0 +1,1 @@
+966f47b390059ada01df5875d7ef941b2c84c228d5fbd8c1ba724bbb401ddd3a  CodexBuddyMenu-v0.1.0-macos-arm64.zip

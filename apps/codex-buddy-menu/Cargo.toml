@@ -1,0 +1,20 @@
+[package]
+name = "codex-buddy-menu"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+eframe = "0.29"
+objc2 = "0.6.4"
+objc2-app-kit = { version = "0.3.2", features = ["NSApplication", "NSResponder", "NSRunningApplication"] }
+tao = "0.35.3"
+tray-icon = "0.24.0"
+
+[[bin]]
+name = "codex-buddy-menu"
+path = "src/main.rs"
+
+[[bin]]
+name = "codex-buddy-preferences"
+path = "src/bin/preferences.rs"
